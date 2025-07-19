@@ -17,6 +17,26 @@ const BACKEND_TECH = [
     color: "from-red-500 to-red-600",
     description: "Framework empresarial con arquitectura modular y TypeScript",
   },
+  {
+    name: "TypeScript",
+    icon: "🔷",
+    color: "from-blue-600 to-blue-700",
+    description: "JavaScript con tipado estático",
+  },
+  {
+    name: "Clean Architecture",
+    icon: "🏗️",
+    color: "from-gray-500 to-gray-600",
+    description: "Patrón de diseño para aplicaciones escalables y mantenibles",
+  }
+  ,
+  {
+    name: "Microservicios",
+    icon: "🔗",
+    color: "from-orange-500 to-orange-600",
+    description: "Arquitectura de software que divide aplicaciones en servicios pequeños e independientes",
+  }
+
 ];
 
 const DATABASE_TECH = [
@@ -66,10 +86,10 @@ const FRONTEND_TECH = [
     description: "Biblioteca para interfaces de usuario",
   },
   {
-    name: "TypeScript",
-    icon: "🔷",
-    color: "from-blue-600 to-blue-700",
-    description: "JavaScript con tipado estático",
+    name: "React Native",
+    icon: "📱",
+    color: "from-blue-500 to-blue-600",
+    description: "Framework para aplicaciones móviles multiplataforma",
   },
   {
     name: "Tailwind CSS",
@@ -119,6 +139,7 @@ const EXPERIENCE = [
     achievements: [
       "Implmentación de CI/CD con Bitbucket",
       "Migración de monolito a microservicios",
+      "Diseñé e implementé una integración robusta con Odoo ERP utilizando exclusivamente su API JSON-RPC.",
       "Monitoreo y optimización de rendimiento",
       "Implementación de pruebas unitarias y de integración",
     ],
@@ -210,53 +231,40 @@ const EDUCATION = [
 
 const PROJECTS = [
   {
-    title: "E-commerce Platform API",
+    title: "Movies APP",
     description:
-      "Scalable REST API for e-commerce platform with authentication, payment processing, and inventory management.",
+      "Aplicación móvil escalable para plataforma de descubrimiento de películas con datos en tiempo real, interfaz de usuario moderna e información completa sobre películas.",
     technologies: [
-      "Node.js",
-      "Express.js",
-      "PostgreSQL",
-      "Redis",
-      "Stripe API",
-    ],
-    features: [
-      "JWT Authentication",
-      "Payment Integration",
-      "Real-time Inventory",
-      "Order Management",
-    ],
-  },
-  {
-    title: "Task Management System",
-    description:
-      "Full-stack application for project and task management with real-time collaboration features.",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Material-UI"],
-    features: [
-      "Real-time Updates",
-      "Team Collaboration",
-      "File Sharing",
-      "Progress Tracking",
-    ],
-  },
-  {
-    title: "Analytics Dashboard",
-    description:
-      "Business intelligence dashboard with data visualization and reporting capabilities.",
-    technologies: [
-      "Next.js",
+      "React Native",
       "TypeScript",
-      "Chart.js",
-      "PostgreSQL",
-      "Prisma",
+      "Expo",
+      "TanStack Query ",
+      "NativeWind",
     ],
     features: [
-      "Interactive Charts",
-      "Data Export",
-      "Custom Reports",
-      "Role-based Access",
+      "Descubrimiento de Películas",
+      "Datos en Tiempo Real",
+      "Interfaz Moderna",
+      "Información Detallada"
     ],
+    githubUrl: "https://github.com/BryanJGomez/movies-app",
   },
+  {
+    title: "Sistema de Gestión de Productos (Microservicios)",
+    description:
+      "Aplicación full-stack para gestión de productos con arquitectura de microservicios, procesamiento de pedidos y autenticación distribuida.",
+    technologies: ["Node.js", "NEst.js", "NATS", "Docker", "PostgreSQL", "MongoDB", "SQLite"],
+    features: [
+      "Arquitectura de Microservicios",
+      "Autenticación JWT",
+      "Gestión de Productos",
+      "Procesamiento de Pedidos",
+      "Comunicación Asíncrona",
+      "Contenedorización Docker",
+    ],
+    githubUrl: "https://github.com/BryanJGomez/products-launcher",
+  },
+
 ];
 
 export {
