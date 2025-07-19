@@ -37,14 +37,10 @@ const Portfolio = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const downloadResume = () => {
-    // Simular descarga de CV
-    const link = document.createElement("a");
-    link.href = "#"; // Aquí iría la URL real del CV
-    link.download = "CV_Backend_Developer.pdf";
-    // En una implementación real, aquí se descargaría el archivo
-    alert(
-      "¡Descargando CV! (En una implementación real, se descargaría el archivo PDF)"
-    );
+    // Abrir el enlace de Google Drive en una nueva pestaña
+    const driveUrl =
+      "https://drive.google.com/file/d/1-7DiEniAWZOeiS4h-6OGvlp6O0owxpXS/view?usp=drive_link";
+    window.open(driveUrl, "_blank");
   };
 
   const scrollToSection = (sectionId) => {
