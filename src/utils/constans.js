@@ -266,8 +266,17 @@ const PROJECTS = [
   },
 
 ];
+const NAV_ITEMS = [
+  { id: 'home', label: 'Inicio' },
+  { id: 'about', label: 'Sobre Mí' },
+  { id: 'tech', label: 'Tecnologías' },
+  { id: 'experience', label: 'Experiencia' },
+  { id: 'projects', label: 'Proyectos' },
+  { id: 'contact', label: 'Contacto' }
+];
 
 export {
+  NAV_ITEMS,
   BACKEND_TECH,
   DATABASE_TECH,
   FRONTEND_TECH,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Github,
   Linkedin,
@@ -21,6 +21,7 @@ import TechStackSection from "../components/TechStackSection";
 import ExperienceCard from "../components/ExperienceCard";
 import EducationCard from "../components/EducationCard";
 import {
+  NAV_ITEMS,
   BACKEND_TECH,
   DATABASE_TECH,
   FRONTEND_TECH,
@@ -33,8 +34,54 @@ import {
 const Portfolio = () => {
   const { isDark } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(
+    NAV_ITEMS[0]?.id || "home"
+  );
+
+  // Detectar la sección activa basada en el scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = NAV_ITEMS.map((item) => item.id);
+      const scrollPosition = window.scrollY + 100; // Offset para mejor detección
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Verificar la sección inicial
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Función para obtener las clases CSS de navegación
+  const getNavLinkClasses = (sectionId) => {
+    const baseNavClasses = `${baseClasses.transition} font-medium relative`;
+    const isActive = activeSection === sectionId;
+
+    if (isActive) {
+      return `${baseNavClasses} text-blue-500`;
+    }
+    return `${baseNavClasses} ${baseClasses.textSecondary} hover:text-blue-500`;
+  };
+
+  // Función para obtener las clases CSS de navegación mobile
+  const getMobileNavLinkClasses = (sectionId) => {
+    const baseMobileClasses = `block w-full text-left py-2 ${baseClasses.transition} font-medium relative`;
+    const isActive = activeSection === sectionId;
+
+    if (isActive) {
+      return `${baseMobileClasses} text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-3 rounded-lg`;
+    }
+    return `${baseMobileClasses} ${baseClasses.textSecondary} hover:text-blue-500`;
+  };
 
   const downloadResume = () => {
     // Abrir el enlace de Google Drive en una nueva pestaña
@@ -73,42 +120,21 @@ const Portfolio = () => {
             </div>
 
             <div className="hidden md:flex items-center gap-8">
-              <button
-                onClick={() => scrollToSection("home")}
-                className={`${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Inicio
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className={`${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Sobre Mí
-              </button>
-              <button
-                onClick={() => scrollToSection("tech")}
-                className={`${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Tecnologías
-              </button>
-              <button
-                onClick={() => scrollToSection("experience")}
-                className={`${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Experiencia
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className={`${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Proyectos
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className={`${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Contacto
-              </button>
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={getNavLinkClasses(item.id)}
+                >
+                  <span className="flex items-center gap-2">
+                    {item.icon && <span className="text-sm">{item.icon}</span>}
+                    {item.label}
+                  </span>
+                  {activeSection === item.id && (
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                  )}
+                </button>
+              ))}
               <button
                 onClick={downloadResume}
                 className={`${gradients.secondary} text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-blue-600 ${baseClasses.transition} flex items-center gap-2`}
@@ -140,42 +166,18 @@ const Portfolio = () => {
             className={`md:hidden border-t ${baseClasses.border} ${baseClasses.cardBg}`}
           >
             <div className="px-6 py-4 space-y-2">
-              <button
-                onClick={() => scrollToSection("home")}
-                className={`block w-full text-left py-2 ${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Inicio
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className={`block w-full text-left py-2 ${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Sobre Mí
-              </button>
-              <button
-                onClick={() => scrollToSection("tech")}
-                className={`block w-full text-left py-2 ${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Tecnologías
-              </button>
-              <button
-                onClick={() => scrollToSection("experience")}
-                className={`block w-full text-left py-2 ${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Experiencia
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className={`block w-full text-left py-2 ${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Proyectos
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className={`block w-full text-left py-2 ${baseClasses.textSecondary} hover:text-blue-500 ${baseClasses.transition} font-medium`}
-              >
-                Contacto
-              </button>
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={getMobileNavLinkClasses(item.id)}
+                >
+                  <span className="flex items-center gap-3">
+                    {item.icon && <span className="text-lg">{item.icon}</span>}
+                    {item.label}
+                  </span>
+                </button>
+              ))}
               <button
                 onClick={downloadResume}
                 className={`w-full ${gradients.secondary} text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-blue-600 ${baseClasses.transition} flex items-center justify-center gap-2`}
