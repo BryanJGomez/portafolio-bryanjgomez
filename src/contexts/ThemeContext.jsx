@@ -11,8 +11,8 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("system");
-  const [resolvedTheme, setResolvedTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
+  const [resolvedTheme, setResolvedTheme] = useState("dark");
 
   // Función para obtener el tema preferido del sistema
   const getSystemTheme = () => {
@@ -21,7 +21,7 @@ export const ThemeProvider = ({ children }) => {
         ? "dark"
         : "light";
     }
-    return "light";
+    return "dark"; // Cambiar el fallback a dark
   };
 
   // Función para aplicar el tema al documento
@@ -69,9 +69,9 @@ export const ThemeProvider = ({ children }) => {
         applyTheme(savedTheme);
       }
     } else {
-      // Si no hay tema guardado, usar el del sistema
-      setTheme("system");
-      applyTheme(getSystemTheme());
+      // Si no hay tema guardado, usar dark por defecto
+      setTheme("dark");
+      applyTheme("dark");
     }
   }, []);
 
